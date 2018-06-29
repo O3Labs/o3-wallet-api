@@ -13,17 +13,32 @@ APIs to O3 Wallet both Mobile and Desktop
 Initialize `o3` object
 ```js
 
-function callback(event) {
-  console.log(event);
+function callback(response) {
+  if (response == null) {
+    console.log("It's not running inside o3 app.")
+    return;
+  }
+  console.log("command ", response.command);
+  console.log("data ", response.data);
 };
 
-o3.Init(callback: callback)
+o3.init(callback)
+```
+
+### Response object
+
+```
+{
+	"command": "",
+	"data": {}
+}
 ```
 
 ### APIs
 
-- isO3Available()
-- platform() `mobile/android`, `mobile/ios`, `desktop/windows` and `desktop/macos`
+- requestToConnect()
+- getPlatform()
 - getAccounts() 
-- getPublicKey(account)
-- signTransaction(account, rawToSign)
+- isAppAvailable()
+- getPublicKey()
+- requestToSignRawTransaction(unsignedRawTransaction)
