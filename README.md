@@ -18,8 +18,7 @@ function callback(response) {
     console.log("It's not running inside o3 app.")
     return;
   }
-  console.log("command ", response.command);
-  console.log("data ", response.data);
+  console.log("response ", JSON.stringify(response));
 };
 
 o3.init(callback)
@@ -30,6 +29,7 @@ o3.init(callback)
 ```
 {
 	"command": "",
+	"sessionID":"",
 	"data": {}
 }
 ```
@@ -42,3 +42,4 @@ o3.init(callback)
 - isAppAvailable()
 - getPublicKey()
 - requestToSignRawTransaction(unsignedRawTransaction)
+- getDeviceInfo()
