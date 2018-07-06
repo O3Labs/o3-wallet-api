@@ -37,6 +37,7 @@ o3.init(callback)
 ### APIs
 
 - requestToConnect()
+- verifySession(sessionID)
 - getPlatform()
 - getAccounts() 
 - isAppAvailable()
@@ -44,3 +45,5 @@ o3.init(callback)
 - requestToSignRawTransaction(unsignedRawTransaction)
 - getDeviceInfo()
 - request(toAddress, asset, amount, message)
+### Events
+- revokedSession 
