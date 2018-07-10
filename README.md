@@ -150,7 +150,17 @@ You can construct an unsigned transaction and request user to sign a transaction
 ```
 --- 
 
-- request(toAddress, asset, amount, message)
+#### `o3.request(toAddress, asset, amount, message)`
+Make a request to user to send specific asset and amount to an address. You don't have to construct a raw transaction nor submit a transaction to a NEO blockchain. O3 app will show a popup saying that your dapp is requesting he/she to send. Once a user authorized the transaciton, a transaction id will be sent to a callback function.
+#### Response
+```
+{
+	"command": "request",
+	"sessionID":"",
+	"data": {}
+}
+```
+--- 
 
 
 ### Events
