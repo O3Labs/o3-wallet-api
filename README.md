@@ -68,8 +68,11 @@ Generally, dapp display a `Connect` button to a user when a user is not logged i
 ```
 {
 	"command": "requestToConnect",
-	"sessionID":"",
-	"data": {}
+	"data": {
+		"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
+		"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 ---
@@ -80,9 +83,12 @@ Typically, dapp contains multiple pages. Asking user to log in on every page is 
 #### Response
 ```
 {
-	"command": "verifySession",
-	"sessionID":"",
-	"data": {}
+	"command": "requestToConnect",
+	"data": {
+		"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
+		"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
@@ -95,8 +101,11 @@ Call this function when you want to know what platform o3 app is running on. `io
 ```
 {
 	"command": "getPlatform",
-	"sessionID":"",
-	"data": {}
+	"data": {
+		"platform": "ios",
+		"version": "1.6.1"
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
@@ -107,8 +116,15 @@ Get user's active account including address and public key.
 ```
 {
 	"command": "getAccounts",
-	"sessionID":"",
-	"data": {}
+	"data": {
+		"accounts": {
+			"neo": {
+				"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
+				"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
+			}
+		}
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
@@ -120,20 +136,24 @@ Your dapp can preriodically call this function to check if user is still active 
 ```
 {
 	"command": "isAppAvailable",
-	"sessionID":"",
-	"data": {}
+	"data": {
+		"isAppAvailable": true
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
 #### `o3.getDeviceInfo()`
-Get user's device information. 
+Get user's device information. (more info is coming)
 
 #### Response
 ```
 {
-	"command": "isAppAvailable",
-	"sessionID":"",
-	"data": {}
+	"command": "getDeviceInfo",
+	"data": {
+		"device": "iPhone"
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
@@ -143,9 +163,15 @@ You can construct an unsigned transaction and request user to sign a transaction
 #### Response
 ```
 {
-	"command": "requestToSignRawTransaction",
-	"sessionID":"",
-	"data": {}
+	"command": "requestToSign",
+	"data": {
+		"signatureData": "2c5c053bce0b5fd8273e4f84af9bf19271d93644e3b25404aff6b3570bce460d0f9a4d890483591e58c6f34a5ba68e8b2f28b1bda33c22ccd2b34ee7cb8ec3a6",
+		"account": {
+			"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
+			"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
+		}
+	},
+	"sessionID": "B3B224E8-F4CC-4686-8773-971144A14A2D"
 }
 ```
 --- 
@@ -173,7 +199,6 @@ User can choose to disconnect or log out at any time. Once a user logged out. O3
 ```
 {
 	"command": "revokedSession",
-	"sessionID":"",
 	"data": {}
 }
 ```
