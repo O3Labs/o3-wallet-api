@@ -157,6 +157,60 @@ Get user's device information. (more info is coming)
 }
 ```
 --- 
+#### `o3.getBalances()`
+Get logged in account's balances. Native assets and all NEP5 tokens with amount more than zero will be returned.
+
+#### Response
+```
+{
+	"command": "getBalances",
+	"data": {
+		"balances": {
+			"GAS": {
+				"decimals": 8,
+				"name": "GAS",
+				"value": 40.127622499999994,
+				"id": "0x602c79718b16e442de58778e148d0b1084e3b2dffd5de6b7b16cee7969282de7",
+				"symbol": "GAS"
+			},
+			"NNC": {
+				"decimals": 2,
+				"name": "NEO Name Credit",
+				"value": 1,
+				"id": "fc732edee1efdf968c23c20a9628eaa5a6ccb934",
+				"symbol": "NNC"
+			},
+			"ONT": {
+				"decimals": 8,
+				"name": "Ontology Token",
+				"value": 125.00000003,
+				"id": "ceab719b8baa2310f232ee0d277c061704541cfb",
+				"symbol": "ONT"
+			},
+			"NEO": {
+				"decimals": 0,
+				"name": "NEO",
+				"value": 10,
+				"id": "0xc56f33fc6ecfcd0c225c4ab356fee59390af8560be0e930faebe74a6daff7c9b",
+				"symbol": "NEO"
+			},
+			"SWTH": {
+				"decimals": 8,
+				"name": "Switcheo",
+				"value": 5694.7608389100005,
+				"id": "ab38352559b8b203bde5fddfa0b07d8b2525e132",
+				"symbol": "SWTH"
+			}
+		},
+		"account": {
+			"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
+			"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
+		}
+	},
+	"sessionID": "D3429985-6387-4DE8-AE07-7988069D3E10"
+}
+```
+--- 
 
 #### `o3.requestToSignRawTransaction(unsignedRawTransaction)`
 You can construct an unsigned transaction and request user to sign a transaction. O3 app will show a popup asking a user that your dapp request he/she to sign a transaction. A user can either cancel or sign a transaction. If you chose to sign a transaction, signed transaction along with user's account will be returned then you are ready to send the transaction off to NEO blockchain.
