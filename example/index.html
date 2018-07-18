@@ -1,0 +1,188 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>O3 Dapp Platform</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="../source/o3-0.0.1.js"></script>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#">O3 Dapp Platform</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+    </div>
+  </nav>
+  <div class="container">
+   <h3>Available functions</h3>
+
+   <div class="row">
+    <div class="col-8">
+
+     <div class="row">
+       <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Init</h5>
+            <p class="card-text">
+              <code>o3.init(callbackFunction)</code>
+              <p>Use this function to initialize o3 by passing a callback function that you would like to receive a response from O3 App</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="o3Init()">O3 Init</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Request to connect</h5>
+            <p class="card-text">
+              <code>o3.requestToConnect()</code>
+              <p>Use this function to request a permission from a user that your dapp would like to connect.</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="requestToConnect()">Request to Connect</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Get current platform</h5>
+            <p class="card-text">
+              <code>o3.getPlatform()</code>
+              <p>Use this function to get a user's device platform</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="getPlatform()">Get platform</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Get accounts</h5>
+            <p class="card-text">
+              <code>o3.getAccounts()</code>
+              <p>Use this function to get logged in accounts. Response includes address and public key.</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="getAccounts()">Get accounts</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Check app status</h5>
+            <p class="card-text">
+              <code>o3.isAppAvailable()</code>
+              <p>Use this function to check if users is still logged in to O3. If browser is closed, response will be false.</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="isAppAvailable()">IsO3Available</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Get device info</h5>
+            <p class="card-text">
+              <code>o3.getDeviceInfo()</code>
+              <p>Use this function to get user's device information.</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="getDeviceInfo()">Get Device Info</button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+
+      <div class="col-12 mb-4">
+        <div class="card" >
+          <div class="card-body">
+            <h5 class="card-title">Sign transaction</h5>
+            <p class="card-text">
+              <code>o3.requestToSignRawTransaction(rawTxInHex)</code>
+              <p>Use this function to request a user to sign a raw transaction. Response is signed transaction with user's private key.</p>
+            </p>
+            <button type="button" class="btn btn-primary" onclick="requestToSignRawTransaction()">Sign </button>
+          </div>
+        </div>
+      </div> <!-- col -->
+
+
+
+    </div> <!-- row -->
+
+  </div>
+  <div class="col">
+    <p>Output</p>
+
+    
+  <div id="callback"></div>
+  <div id="error"></div>
+  </div>
+</div>
+
+
+
+</div> <!-- container -->
+
+<script type="text/javascript">
+  function callbackHandler(response) {
+   if (response == null) {
+    document.getElementById("error").innerHTML = "You don't have o3 app installed";
+  } else {
+    document.getElementById("callback").innerText +=JSON.stringify(response);  
+  }
+};
+
+
+function getPlatform(){
+  o3.getPlatform();
+}
+
+function getAccounts(){
+  o3.getAccounts()
+}
+
+function requestToConnect(){
+  o3.requestToConnect()
+}
+
+function isAppAvailable(){
+  o3.isAppAvailable();
+}
+
+function requestToSignRawTransaction(){
+  var raw = "00";
+  o3.requestToSignRawTransaction(raw);
+}
+
+function getDeviceInfo() {
+  o3.getDeviceInfo()
+}
+
+function o3Init(){
+  o3.init(callbackHandler);
+}
+
+</script>
+
+
+</body>
+</html>

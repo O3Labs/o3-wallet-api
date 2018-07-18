@@ -1,0 +1,106 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>O3 Dapp Platform</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script type="text/javascript" src="../source/o3-0.0.1.js?fasdfdsf"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="#">O3 Dapp Platform</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+
+    </div>
+  </nav>
+  <div class="container" id="app">
+    <div class="row">
+      <div class="col text-center">
+        <div>
+
+        </div>
+        <button v-show="loggedIn == false" type="button" class="btn btn-primary" v-on:click="requestToConnect()">Connect to O<sub>3</sub></button>
+
+        <button type="button" class="btn btn-primary" v-on:click="o3.getBalances()">o3.getBalances()</button>
+
+        <div >
+          <div id="address">{{loggedInAddress}}</div>
+          <div class="text-danger" v-show="error != null">{{error}}</div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- container -->
+
+  <script type="text/javascript">
+
+    var app = new Vue({
+      el: '#app',
+      data: {
+        loggedInAddress:null,
+        loggedIn:false,
+        error:null,
+      },
+      methods:{
+        init:function(){
+          //always init with callback
+          o3.init(this.callbackHandler);
+          var session = sessionStorage.getItem("sessionID");
+          if (session != "" && session != null) {
+            o3.verifySession(session)
+          }
+        },
+        callbackHandler:function(response){
+         this.error = null;
+         if (response == null) {
+          return;
+        }
+
+        
+
+        if (response.error !== undefined) {
+          this.error = response.error.message;
+          return; 
+        }
+
+        this.loggedInAddress = JSON.stringify(response);  
+
+        if (response.command == "verifySession") {
+          this.loggedIn = true;
+          this.loggedInAddress = JSON.stringify(response);  
+          return;
+        }
+
+        if (response.command == "requestToConnect") {
+          this.loggedIn = true;
+          this.loggedInAddress = response.data.address;
+          sessionStorage.setItem("sessionID",response.sessionID)
+          return;
+        }
+
+        if (response.command == "revokedSession") {
+          this.loggedIn = false;
+          this.loggedInAddress = null;
+          sessionStorage.removeItem("sessionID")
+        }
+
+      },
+      requestToConnect:function(){
+        o3.requestToConnect()
+      },
+    },
+    mounted:function(){
+      this.init();
+    }
+  })
+</script>
+</body>
+</html>
