@@ -83,7 +83,7 @@ Typically, dapp contains multiple pages. Asking user to log in on every page is 
 #### Response
 ```
 {
-	"command": "requestToConnect",
+	"command": "verifySession",
 	"data": {
 		"publicKey": "03b0ca78d8bc3bfc36d1a659114bdaec91139cf2809d1a01da0cbf593ee3167f8c",
 		"address": "AcydXy1MvrzaT8qD3Qe4B8mqEoinTvRy8U"
